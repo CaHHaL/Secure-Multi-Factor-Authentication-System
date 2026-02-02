@@ -1,0 +1,57 @@
+express → backend framework
+mongoose → MongoDB connection
+dotenv → environment variables
+bcrypt → password & OTP hashing
+jsonwebtoken → session tokens
+express-rate-limit → brute-force protection
+cors → frontend-backend communication
+
+
+
+
+Signup
+  ↓
+Login (Password)
+  ↓
+OTP Verification
+  ↓
+Access Token (15 min)
+Refresh Token (7 days)
+  ↓
+Protected APIs
+
+
+
+Testing
+curl -X POST http://localhost:5000/api/auth/signup ^
+-H "Content-Type: application/json" ^
+-d "{\"email\":\"test@example.com\",\"password\":\"Test@123\"}"
+
+
+curl -X POST http://localhost:5000/api/auth/login ^
+-H "Content-Type: application/json" ^
+-d "{\"email\":\"test@example.com\",\"password\":\"Test@123\"}"
+
+
+curl -X POST http://localhost:5000/api/auth/verify-otp ^
+-H "Content-Type: application/json" ^
+-d "{\"email\":\"test@example.com\",\"otp\":\"483920\"}"
+
+
+curl http://localhost:5000/api/auth/protected ^
+-H "Authorization: Bearer ACCESS_TOKEN_HERE"
+
+
+curl -X POST http://localhost:5000/api/auth/refresh-token ^
+-H "Content-Type: application/json" ^
+-d "{\"refreshToken\":\"REFRESH_TOKEN_HERE\"}"
+
+
+curl -X POST http://localhost:5000/api/auth/logout ^
+-H "Content-Type: application/json" ^
+-d "{\"refreshToken\":\"REFRESH_TOKEN_HERE\"}"
+
+
+curl -X POST http://localhost:5000/api/auth/refresh-token ^
+-H "Content-Type: application/json" ^
+-d "{\"refreshToken\":\"REFRESH_TOKEN_HERE\"}"
